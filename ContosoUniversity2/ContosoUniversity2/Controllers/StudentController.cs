@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using ContosoUniversity2.DAL;
 using ContosoUniversity2.Models;
 using PagedList;
+using System.Data.Entity.Infrastructure;
 namespace ContosoUniversity2.Controllers
 {
     public class StudentController : Controller
