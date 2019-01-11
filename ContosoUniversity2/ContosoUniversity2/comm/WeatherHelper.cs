@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ContosoUniversity2.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace ContosoUniversity2.comm
     {
        static string appkey = "cbf9bd908fd36eccc829483db835996b"; //配置您申请的appkey
 
-        public static JsonObject GetWeatherByCityName(string city)
+        public static Weather GetWeatherByCityName(string city)
         {
             string url1 = "http://v.juhe.cn/weather/index";
 
@@ -31,7 +32,7 @@ namespace ContosoUniversity2.comm
 
             if (errorCode == "0")
             {
-                return newObj;
+                return ConverToWearther(newObj);
             }
             else
             {
@@ -40,6 +41,15 @@ namespace ContosoUniversity2.comm
             }
         }
 
+
+        public static Weather ConverToWearther(JsonObject jsonObj)
+        {
+            Weather wt = new Weather();
+            wt.City = jsonObj["result"].Object["today"].Object["city"].Value;
+            wt.Temperature=jsonObj["result"].Object["today"].Object["temperature"].Value;
+            wt.Humidity=jsonObj["result"].Object["sk"].Object["humidity"].Value;
+            return wt;
+        }
         
       
 
